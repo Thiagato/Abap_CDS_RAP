@@ -1,0 +1,41 @@
+@Metadata.layer: #CUSTOMER
+ 
+@UI:{
+    headerInfo: { typeName: 'Item Pedido', typeNamePlural: 'Itens Pedido',
+                  title: { label: 'Item Pedido', value: 'Item', type: #STANDARD }
+                }
+    }
+ 
+annotate entity zc_ths_order_it with
+{
+  @UI.facet: [
+                { id: 'Venda', label: 'Detalhes do Pedido', purpose: #STANDARD,
+                  position: 10, type: #IDENTIFICATION_REFERENCE
+                }
+             ]
+  @UI.lineItem: [{ position: 10 }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  @EndUserText.label: 'Ordem'
+  OrderId;
+  @UI.lineItem: [{ position: 20 }]
+  @UI.selectionField: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  @EndUserText.label: 'Item'
+  Item;
+  @UI.lineItem: [{ position: 30 }]
+  @UI.selectionField: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  @EndUserText.label: 'Produto'
+  Product;
+  @UI.lineItem: [{ position: 40 }]
+  @UI.selectionField: [{ position: 40 }]
+  @UI.identification: [{ position: 40 }]
+  @EndUserText.label: 'Quantidade'
+  Quantity;
+  @UI.lineItem: [{ position: 50 }]
+  @UI.selectionField: [{ position: 50 }]
+  @UI.identification: [{ position: 50 }]
+  @EndUserText.label: 'Valor'
+  SalesPrice;
+}

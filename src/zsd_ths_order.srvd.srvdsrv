@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition Order'
+define service Zsd_ths_order {
+  expose ZC_THS_ORDER    as Vendas;
+  expose zc_ths_order_it as Itens;
+}

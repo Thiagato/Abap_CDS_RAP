@@ -1,0 +1,54 @@
+managed implementation in class zcl_i_ths_order unique;
+strict ( 2 );
+
+define behavior for zi_ths_order alias Order
+persistent table ztths_order
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+  association _Itens { create; }
+  field ( readonly, numbering : managed ) Orderid;
+  //numbering fala pra o rap gerenciar ele
+  field ( mandatory : create ) Company, Customer, Vendor;
+// sao obrigados a ter na criação
+
+    action SendOrder;
+    //uma ação personalizada
+    determination updateFields on save { field Vendor; }
+
+  mapping for ztths_order
+    {
+      Company  = company;
+      Customer = customer;
+      Orderid  = orderid;
+      Usnam    = usnam;
+      Vendor   = vendor;
+    }
+}
+
+define behavior for zi_ths_order_it alias Item
+persistent table ztths_order_it
+lock dependent by _Order
+authorization dependent by _Order
+early numbering
+{
+  update;
+  delete;
+  association _Order;
+  field ( readonly ) OrderId, Item, SalesPrice;
+
+  validation validateQuantity on save {field Item, Product, Quantity; create; }
+  //valide isso dos campos item produtos quantidade na hora que for criar
+
+  mapping for ztths_order_it
+    {
+      OrderId  = order_id;
+      Item     = item;
+      Product  = product;
+      Quantity = quantity;
+      UnityMeasure = unity_measure;
+    }
+}

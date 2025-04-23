@@ -1,0 +1,46 @@
+@Metadata.layer: #CUSTOMER
+
+@UI:{
+    headerInfo:{ typeName: 'Venda', typeNamePlural: 'Vendas',
+                  title:{ label: 'Venda', value: 'Orderid', type: #STANDARD }
+                  }
+    }
+
+annotate entity ZC_THS_ORDER with
+{
+
+  @UI.facet: [
+                { id: 'Venda', label: 'Detalhes do Pedido', purpose: #STANDARD,
+                  position: 10, type: #IDENTIFICATION_REFERENCE },
+                { id: 'ItensVenda', label: 'Itens do Pedido', purpose: #STANDARD,
+                  position: 20, type: #LINEITEM_REFERENCE, targetElement: '_Itens'}
+             ]
+
+  @UI:{ selectionField: [ { position: 10 } ],
+        identification: [ { position: 10 } ],
+        lineItem: [ { position: 10 } ,
+        { type: #FOR_ACTION, dataAction: 'SendOrder', label: 'Sendo Order', position: 10, invocationGrouping: #CHANGE_SET}]
+            
+         }
+         @EndUserText.label: 'Ordem'
+  Orderid;
+  @UI:{ selectionField: [ { position: 20 } ],
+        identification: [ { position: 20 } ],
+        lineItem: [ { position: 20 } ]
+         }
+         @EndUserText.label: 'Cliente'
+  Customer;
+  @UI:{ selectionField: [ { position: 30 } ],
+        identification: [ { position: 30 } ],
+        lineItem: [ { position: 30 } ]
+         }
+         @EndUserText.label: 'Vendedor'
+  Vendor;
+  @UI:{ selectionField: [ { position: 40 } ],
+        identification: [ { position: 40 } ],
+        lineItem: [ { position: 40 } ]
+         }
+         @EndUserText.label: 'Empresa'
+  Company;
+
+}
